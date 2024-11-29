@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857867208319",
+    "project_id": "dam-try",
+    "storage_bucket": "dam-try.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857867208319:android:bf2ee628baac4692c3214a",
+        "android_client_info": {
+          "package_name": "com.dam.fluttertry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALoyT_EQWBkffmYm2lVW55q_c3SeRYSto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
