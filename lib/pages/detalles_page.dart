@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetallesPage extends StatefulWidget {
-  const DetallesPage({super.key});
+  const DetallesPage({super.key, required String recetaId});
 
   @override
   State<DetallesPage> createState() => _DetallesPageState();

@@ -1,35 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertry/pages/detalles_page.dart';
 
-Padding RecetasWidget() {
-  return Padding(
-    padding: EdgeInsets.all(10),
-    child: Container(
-      height: 80,
-      decoration: BoxDecoration(
-        color: Color(0xFFDDA059),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Color(0xFF6B3710), width: 2),
-      ),
-      child: ListTile(
-        leading: Container(
-          height: double.infinity,
-          width: 70,
-          color: Colors.green,
-          // child: Image.asset('assets/images/Receta1.jpg', fit: BoxFit.cover),
-        ),
-        title: Container(
-          child: Text(
-            'Nombre de la receta',
-            style: TextStyle(fontFamily: 'StardewValley', fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white),
+class RecetasWidget extends StatelessWidget {
+  final DocumentSnapshot receta;
+
+  RecetasWidget({required this.receta, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 150,
+            color: Colors.red,
+            child: Center(
+              child: Text(
+                receta['foto'] ?? 'No Image',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
-        ),
-        subtitle: Container(
-          child: Text('Creador de la receta', style: TextStyle(fontFamily: 'StardewValley', color: Colors.white, fontSize: 15)),
-        ),
-        trailing: Container(
-          child: Text('Categoria', style: TextStyle(fontFamily: 'StardewValley', color: Colors.white, fontSize: 15)),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              receta['nombre'],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              receta['creador'],
+              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                MaterialPageRoute route = MaterialPageRoute(
+                  builder: (context) => DetallesPage(
+                    recetaId: receta.id,
+                  ),
+                );
+                Navigator.push(context, route);
+              },
+              child: Text('Detalles'),
+            ),
+          ),
+        ],
       ),
-    ),
-  );
+    );
+  }
 }

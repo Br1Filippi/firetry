@@ -23,7 +23,9 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute route = MaterialPageRoute(
               builder: (context) => AgregarPage(),
             );
-            Navigator.push(context, route);
+            Navigator.push(context, route).then((value) {
+              setState(() {});
+            });
           },
           child: Icon(Icons.add),
         ),

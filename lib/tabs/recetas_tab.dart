@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:fluttertry/pages/detalles_page.dart';
+import 'package:fluttertry/services/fbstore_service.dart';
 import 'package:fluttertry/widgets/recetas_widget.dart';
 
 class RecetasTab extends StatelessWidget {
@@ -15,29 +15,21 @@ class RecetasTab extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: ListView(
-        children: [
-          Slidable(
-            startActionPane: ActionPane(
-              motion: ScrollMotion(),
-              children: [
-                SlidableAction(
-                  onPressed: (BuildContext context) {
-                    MaterialPageRoute route = MaterialPageRoute(
-                      builder: (context) => DetallesPage(),
-                    );
-                    Navigator.push(context, route);
-                  },
-                  label: 'Detalles',
-                  icon: Icons.info,
-                  backgroundColor: Color(0XFF59C9F1),
-                  foregroundColor: Colors.white,
-                )
-              ],
-            ),
-            child: RecetasWidget(),
-          ),
-        ],
+      child: StreamBuilder(
+        stream: FbStoreService().recetas(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              var receta = snapshot.data!.docs[index];
+              return RecetasWidget(receta: receta);
+            },
+          );
+        },
       ),
     );
   }
