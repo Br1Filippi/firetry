@@ -9,11 +9,9 @@ class AgregarPage extends StatefulWidget {
 
 class _AgregarPageState extends State<AgregarPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nombreController = TextEditingController();
-  final TextEditingController _instruccionesController =
-      TextEditingController();
-  final TextEditingController _fotoController = TextEditingController();
-  final FbStoreService _fbService = FbStoreService();
+  final TextEditingController nombreController = TextEditingController();
+  final TextEditingController instruccionesController = TextEditingController();
+  final TextEditingController fotoController = TextEditingController();
   User? _currentUser;
   String? _selectedCategoria;
   List<String> _categorias = [];
@@ -26,7 +24,7 @@ class _AgregarPageState extends State<AgregarPage> {
   }
 
   Future<void> _loadCategorias() async {
-    final categorias = await _fbService.obtenerCategorias();
+    final categorias = await FbStoreService().obtenerCategorias();
     setState(() {
       _categorias = categorias;
     });
@@ -45,7 +43,7 @@ class _AgregarPageState extends State<AgregarPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                controller: _nombreController,
+                controller: nombreController,
                 decoration: InputDecoration(labelText: 'Nombre'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -55,7 +53,7 @@ class _AgregarPageState extends State<AgregarPage> {
                 },
               ),
               TextFormField(
-                controller: _instruccionesController,
+                controller: instruccionesController,
                 decoration: InputDecoration(labelText: 'Instrucciones'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -65,7 +63,7 @@ class _AgregarPageState extends State<AgregarPage> {
                 },
               ),
               TextFormField(
-                controller: _fotoController,
+                controller: fotoController,
                 decoration: InputDecoration(labelText: 'Foto URL'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -99,11 +97,11 @@ class _AgregarPageState extends State<AgregarPage> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    _fbService
+                    FbStoreService()
                         .nuevaReceta(
-                      _nombreController.text,
-                      _instruccionesController.text,
-                      _fotoController.text,
+                      nombreController.text.trim(),
+                      instruccionesController.text.trim(),
+                      fotoController.text.trim(),
                       _currentUser?.displayName ?? 'Anónimo',
                       _selectedCategoria!,
                     )

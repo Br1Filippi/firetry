@@ -14,12 +14,8 @@ class MisRecetasTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
 
-    if (user == null) {
-      return Center(child: Text('No estás logueado'));
-    }
-
     return StreamBuilder(
-      stream: _fbService.recetasPorCreador(user.displayName ?? 'Anónimo'),
+      stream: _fbService.recetasPorCreador(user?.displayName ?? 'Anónimo'),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
