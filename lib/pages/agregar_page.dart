@@ -34,13 +34,43 @@ class _AgregarPageState extends State<AgregarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xFFDDA059)),
+        iconTheme: IconThemeData(color: Color(0xFFF7BA20)),
+        leading: Padding(
+          padding: EdgeInsets.all(6),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xFF6B3710),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ),
         title: Text(
           'Agregar Receta',
           style: TextStyle(
-              fontFamily: 'StardewValley',
-              fontSize: 28,
-              color: Color(0xFFDDA059)),
+            fontFamily: 'StardewValley',
+            fontSize: 28,
+            color: Color(0xFFF7BA20),
+            shadows: [
+              Shadow(offset: Offset(-1, -1), color: Color(0xFF6B3710)),
+              Shadow(offset: Offset(1, -1), color: Color(0xFF6B3710)),
+              Shadow(offset: Offset(-1, 1), color: Color(0xFF6B3710)),
+              Shadow(offset: Offset(1, 1), color: Color(0xFF6B3710)),
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black.withOpacity(0.3),
+              ),
+            ],
+          ),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(

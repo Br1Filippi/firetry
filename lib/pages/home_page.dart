@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       length: 2,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Color(0xFF6B3710),
+          backgroundColor: Color(0xFFF7BA20),
           foregroundColor: Colors.white,
           onPressed: () {
             MaterialPageRoute route = MaterialPageRoute(
@@ -57,9 +57,20 @@ class _HomePageState extends State<HomePage> {
             child: Text(
               'Stardew Valley Recipes',
               style: TextStyle(
-                color: Color(0xFFDDA059),
+                color: Color(0xFFF7BA20),
                 fontFamily: 'StardewValley',
                 fontSize: 28,
+                shadows: [
+                  Shadow(offset: Offset(-1, -1), color: Color(0xFF6B3710)),
+                  Shadow(offset: Offset(1, -1), color: Color(0xFF6B3710)),
+                  Shadow(offset: Offset(-1, 1), color: Color(0xFF6B3710)),
+                  Shadow(offset: Offset(1, 1), color: Color(0xFF6B3710)),
+                  Shadow(
+                    offset: Offset(2.0, 2.0),
+                    blurRadius: 3.0,
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                ],
               ),
             ),
           ),
@@ -73,9 +84,23 @@ class _HomePageState extends State<HomePage> {
           ),
           bottom: TabBar(
             indicatorColor: Color(0xFFB52121),
-            labelStyle: TextStyle(fontFamily: 'StardewValley', fontSize: 20),
-            labelColor: Color(0xFFDDA059),
-            unselectedLabelColor: Color(0xFFDDA059),
+            labelStyle: TextStyle(
+              fontFamily: 'StardewValley',
+              fontSize: 20,
+              shadows: [
+                Shadow(offset: Offset(-1, -1), color: Color(0xFF6B3710)),
+                Shadow(offset: Offset(1, -1), color: Color(0xFF6B3710)),
+                Shadow(offset: Offset(-1, 1), color: Color(0xFF6B3710)),
+                Shadow(offset: Offset(1, 1), color: Color(0xFF6B3710)),
+                Shadow(
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 3.0,
+                  color: Colors.black.withOpacity(0.3),
+                ),
+              ],
+            ),
+            labelColor: Color(0xFFF7BA20),
+            unselectedLabelColor: Color(0xFFF7BA20),
             tabs: [
               Tab(
                 text: 'Recetas',

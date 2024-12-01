@@ -21,88 +21,100 @@ class RecetasWidget extends StatelessWidget {
       margin: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(6),
+                  topRight: Radius.circular(6),
+                ),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/${this.receta['foto']}'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-              border: Border.all(
-                color: Color(0xFF6B3710),
-                width: 4,
-              ),
-              image: DecorationImage(
-                image: AssetImage('assets/images/${this.receta['foto']}'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            height: 150,
-            child: null,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              receta['nombre'],
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'StardewValley',
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  receta['creador'],
+                  receta['nombre'],
                   style: TextStyle(
-                    fontSize: 19,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'StardewValley',
                     color: Colors.white,
                   ),
+                  maxLines: 2,
+                  softWrap: true,
                 ),
-                Text(
-                  receta['categoria'],
-                  style: TextStyle(
-                    fontSize: 22, // Tamaño de la categoría aumentado
-                    fontFamily: 'StardewValley',
-                    color: Colors.white,
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        receta['creador'],
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'StardewValley',
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF6B3710),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        receta['categoria'],
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'StardewValley',
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF6B3710),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    onPressed: () {
+                      MaterialPageRoute route = MaterialPageRoute(
+                        builder: (context) => DetallesPage(
+                          recetaId: receta.id,
+                        ),
+                      );
+                      Navigator.push(context, route);
+                    },
+                    child: Text(
+                      'Detalles',
+                      style: TextStyle(
+                        fontFamily: 'StardewValley',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF6B3710)),
-                  ),
-                  onPressed: () {
-                    MaterialPageRoute route = MaterialPageRoute(
-                      builder: (context) => DetallesPage(
-                        recetaId: receta.id,
-                      ),
-                    );
-                    Navigator.push(context, route);
-                  },
-                  child: Text(
-                    'Detalles',
-                    style: TextStyle(
-                      fontFamily: 'StardewValley',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )),
         ],
       ),
     );
