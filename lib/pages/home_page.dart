@@ -19,6 +19,8 @@ class _HomePageState extends State<HomePage> {
       length: 2,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF6B3710),
+          foregroundColor: Colors.white,
           onPressed: () {
             MaterialPageRoute route = MaterialPageRoute(
               builder: (context) => AgregarPage(),

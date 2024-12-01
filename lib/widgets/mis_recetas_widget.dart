@@ -23,13 +23,9 @@ class MisRecetasWidget extends StatelessWidget {
             width: 70,
             color: Colors.green,
             child: Center(
-              child: Text(
-                receta['foto'] ?? 'No Image',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Image(
+                image: AssetImage('assets/images/${this.receta['foto']}'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
