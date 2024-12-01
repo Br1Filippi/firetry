@@ -5,10 +5,6 @@ class FbStoreService {
     return FirebaseFirestore.instance.collection('recetas').snapshots();
   }
 
-  Stream<DocumentSnapshot> recetaConId(String id) {
-    return FirebaseFirestore.instance.collection('recetas').doc(id).snapshots();
-  }
-
   Stream<QuerySnapshot> recetasPorCreador(String creador) {
     return FirebaseFirestore.instance
         .collection('recetas')
@@ -20,13 +16,6 @@ class FbStoreService {
     final snapshot =
         await FirebaseFirestore.instance.collection('categorias').get();
     return snapshot.docs.map((doc) => doc['nombre'] as String).toList();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> categoria(String cat) {
-    return FirebaseFirestore.instance
-        .collection('categorias')
-        .where('nombre', isEqualTo: cat)
-        .snapshots();
   }
 
   Future<void> nuevaReceta(
